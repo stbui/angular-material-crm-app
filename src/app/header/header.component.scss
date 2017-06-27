@@ -1,0 +1,25 @@
+:host {
+  z-index: 500;
+}
+
+.main-toolbar {
+  background-color: #fff;
+  height: 64px;
+  padding-left: 16px;
+}
+
+.badge {
+  background-color: transparent;
+  position: absolute;
+  top: 6px;
+  right: 3px;
+  color: inherit;
+}
+
+.search-btn,
+.notify-btn,
+.fullscreen-btn,
+.more-btn {
+  height: 100%;
+  min-width: 50px;
+}
