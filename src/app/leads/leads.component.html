@@ -1,0 +1,77 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <md-card fxFlex>
+    <md-card-title>线索</md-card-title>
+    <md-card-content>
+      <md-tab-group>
+        <md-tab label="全部线索">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="10">跟进状态:</div>
+            <div>
+              <button md-button>全部</button>
+              <button md-button>已处理</button>
+              <button md-button>关闭</button>
+              <button md-button>未处理</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="10">选择项目:</div>
+            <div>
+              <button md-button>全部</button>
+              <button md-button>已处理</button>
+              <button md-button>关闭</button>
+              <button md-button>未处理</button>
+            </div>
+          </div>
+
+        </md-tab>
+        <md-tab label="我的线索">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="10">跟进状态:</div>
+            <div>
+              <button md-button>全部</button>
+              <button md-button>已处理</button>
+              <button md-button>关闭</button>
+              <button md-button>未处理</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="10">选择项目:</div>
+          </div>
+        </md-tab>
+        <md-tab label="我下属的线索">我下属的线索</md-tab>
+        <md-tab label="已转客户的线索">已转客户的线索</md-tab>
+      </md-tab-group>
+    </md-card-content>
+  </md-card>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center" class="table-tools">
+  <span class="show-result">已选 0 条线索</span>
+  <button md-raised-button class="table-tools-btn"><md-icon>reply</md-icon><span>转移</span></button>
+  <button md-raised-button class="table-tools-btn"><md-icon>edit</md-icon><span>编辑</span></button>
+  <button md-raised-button class="table-tools-btn" (click)="onMultiDelete()"><md-icon>delete</md-icon><span>删除</span></button>
+  <span fxFlex></span>
+  <stbui-search (onSearch)="onSearch($event)"></stbui-search>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start center" class="table-lists">
+  {{ checkedAll }}
+  <table class="table table-bordered table-striped table-hover">
+    <tr>
+      <th><md-checkbox [(ngModel)]="checkedAll" (change)="onCheckedAllChange($event)"></md-checkbox></th>
+      <th *ngFor="let column of columns">{{ column }}</th>
+    </tr>
+    <tr *ngFor="let row of dataStore;let i = index;">
+      <td><md-checkbox [checked]="checkedAll" (change)="onCheckedChange($event)" [id]="i"></md-checkbox></td>
+      <td>{{ row.name }}</td>
+      <td>{{ i }}</td>
+      <td>222</td>
+      <td>222</td>
+      <td>222</td>
+      <td>222</td>
+    </tr>
+  </table>
+  <stbui-pagination [total]="pageTotal" (onPage)="onPage($event)"></stbui-pagination>
+</div>
+

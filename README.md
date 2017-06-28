@@ -69,3 +69,7 @@ ng build --prod --aot --env=prod --extract-css
 ### 关联项目
 
 [angular-material2-admin-app](https://github.com/stbui/angular2-material2-bootstrap4-admin-app)
+
+
+
+amap 接口地址依赖环境配置将移到组件内

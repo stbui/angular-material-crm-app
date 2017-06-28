@@ -7,6 +7,11 @@ $candy-app-warn: mat-palette($mat-red);
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
 @include angular-material-theme($candy-app-theme);
 
+@import "./app/component/pagination/pagination.component";
+@include pagination-theme($candy-app-theme);
+
+@import './styles/_tables';
+
 html, body {
   margin: 0;
   padding: 0;
@@ -24,4 +29,8 @@ html, body {
 
 md-sidenav-container {
   height: 100%;
+}
+
+md-card {
+  margin: 20px;
 }

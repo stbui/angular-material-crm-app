@@ -1,22 +1,36 @@
-import { Injectable,Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { SidenavItem } from './item/item.model';
-import { BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class SidenavService {
 
-  private _itemsSubject: BehaviorSubject<SidenavItem[]> = new BehaviorSubject<SidenavItem[]>([]);
-  private _items: SidenavItem[] = [];
-  items$: Observable<SidenavItem[]> = this._itemsSubject.asObservable();
+  private _itemsSubject:BehaviorSubject<SidenavItem[]> = new BehaviorSubject<SidenavItem[]>([]);
+  private _items:SidenavItem[] = [];
+  items$:Observable<SidenavItem[]> = this._itemsSubject.asObservable();
 
-  private _currentlyOpenSubject: BehaviorSubject<SidenavItem[]> = new BehaviorSubject<SidenavItem[]>([]);
-  private _currentlyOpen: SidenavItem[] = [];
-  currentlyOpen$: Observable<SidenavItem[]> = this._currentlyOpenSubject.asObservable();
+  private _currentlyOpenSubject:BehaviorSubject<SidenavItem[]> = new BehaviorSubject<SidenavItem[]>([]);
+  private _currentlyOpen:SidenavItem[] = [];
+  currentlyOpen$:Observable<SidenavItem[]> = this._currentlyOpenSubject.asObservable();
 
   constructor() {
-    let dashboard = this.addItem('Dashboard', 'home', '/dashboard', 1);
-    let materials = this.addItem('UI Kit', 'bubble_chart', null, 3);
-    this.addSubItem(materials, 'Buttons', '/materials/buttons', 1);
+    let dashboard = this.addItem('工作台', 'dashboard', '/dashboard', 1);
+    this.addItem('线索', 'home', '/leads', 1);
+    this.addItem('客户', 'group', '/customers', 1);
+    this.addItem('客户公海', 'group', '/', 1);
+    this.addItem('联系人', 'comment', '/', 1);
+    this.addItem('商机', 'home', '/', 1);
+    this.addItem('合同', 'insert_drive_file', '/', 1);
+    this.addItem('回款', 'home', '/', 1);
+    this.addItem('产品', 'home', '/', 1);
+    this.addItem('报表中心', 'home', '/', 1);
+    this.addItem('工作报告', 'home', '/', 1);
+    this.addItem('跟进记录', 'home', '/', 1);
+    this.addItem('短信群发', 'home', '/', 1);
+    this.addItem('数据上报', 'home', '/', 1);
+
+    let materials = this.addItem('线索', 'bubble_chart', null, 3);
+    this.addSubItem(materials, '客户', '/materials/buttons', 1);
     this.addSubItem(materials, 'Cards', '/materials/cards', 2);
     this.addSubItem(materials, 'Lists', '/materials/lists', 3);
     this.addSubItem(materials, 'Menu', '/materials/menu', 3);
@@ -67,7 +81,7 @@ export class SidenavService {
     this.addSubItem(apps, '码农庄园', '/apps/navigation', 1);
   }
 
-  addItem(name: string, icon: string, route: string, position: number, badge?: string, badgeColor?: string) {
+  addItem(name:string, icon:string, route:string, position:number, badge?:string, badgeColor?:string) {
     let item = new SidenavItem({
       name: name,
       icon: icon,
@@ -84,7 +98,7 @@ export class SidenavService {
     return item;
   }
 
-  addSubItem(parent: SidenavItem, name: string, route: string, position: number) {
+  addSubItem(parent:SidenavItem, name:string, route:string, position:number) {
     let item = new SidenavItem({
       name: name,
       route: route,
@@ -99,14 +113,14 @@ export class SidenavService {
     return item;
   }
 
-  isOpen(item: SidenavItem) {
+  isOpen(item:SidenavItem) {
     return (this._currentlyOpen.indexOf(item) != -1);
   }
 
-  toggleCurrentlyOpen(item: SidenavItem) {
+  toggleCurrentlyOpen(item:SidenavItem) {
     let currentlyOpen = this._currentlyOpen;
-    if (this.isOpen(item)) {
-      if (currentlyOpen.length > 1) {
+    if(this.isOpen(item)) {
+      if(currentlyOpen.length > 1) {
         currentlyOpen.length = this._currentlyOpen.indexOf(item);
       } else {
         currentlyOpen = [];
@@ -119,10 +133,10 @@ export class SidenavService {
     this._currentlyOpenSubject.next(currentlyOpen);
   }
 
-  getAllParents(item: SidenavItem, currentlyOpen: SidenavItem[] = []) {
+  getAllParents(item:SidenavItem, currentlyOpen:SidenavItem[] = []) {
     currentlyOpen.unshift(item);
 
-    if (item.hasParent()) {
+    if(item.hasParent()) {
       return this.getAllParents(item.parent, currentlyOpen);
     } else {
       return currentlyOpen;
