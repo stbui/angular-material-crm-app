@@ -47,7 +47,7 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center" class="table-tools">
-  <span class="show-result">已选 0 条线索</span>
+  <span class="show-result">已选 {{ checkednum }} 条线索</span>
   <button md-raised-button class="table-tools-btn"><md-icon>reply</md-icon><span>转移</span></button>
   <button md-raised-button class="table-tools-btn"><md-icon>edit</md-icon><span>编辑</span></button>
   <button md-raised-button class="table-tools-btn" (click)="onMultiDelete()"><md-icon>delete</md-icon><span>删除</span></button>
@@ -56,20 +56,19 @@
 </div>
 
 <div fxLayout="column" fxLayoutAlign="start center" class="table-lists">
-  {{ checkedAll }}
   <table class="table table-bordered table-striped table-hover">
     <tr>
       <th><md-checkbox [(ngModel)]="checkedAll" (change)="onCheckedAllChange($event)"></md-checkbox></th>
       <th *ngFor="let column of columns">{{ column }}</th>
     </tr>
-    <tr *ngFor="let row of dataStore;let i = index;">
-      <td><md-checkbox [checked]="checkedAll" (change)="onCheckedChange($event)" [id]="i"></md-checkbox></td>
+    <tr *ngFor="let row of tableData;let i = index;">
+      <td><md-checkbox [checked]="checkedAll" (change)="onCheckedChange($event)" [id]="row.id"></md-checkbox></td>
       <td>{{ row.name }}</td>
-      <td>{{ i }}</td>
-      <td>222</td>
-      <td>222</td>
-      <td>222</td>
-      <td>222</td>
+      <td>{{ row.id }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
   </table>
   <stbui-pagination [total]="pageTotal" (onPage)="onPage($event)"></stbui-pagination>

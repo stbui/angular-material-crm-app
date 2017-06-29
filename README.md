@@ -1,6 +1,6 @@
-# 通用管理系统快速开发框架
+# CRM系统快速开发框架
 
-基于最新`Angular 4`框架与`Material2`技术的企业级通用管理系统快速开发框架，涵盖了大量的常用组件和基础功能，您可以快速开发各种MIS系统，如CMS、OA、CRM、ERP、POS等，最大程度上帮助企业节省时间成本和费用开支。
+基于最新`Angular 4`框架与`Material2`技术的企业级CRM系统快速开发框架，涵盖了大量的常用组件和基础功能，最大程度上帮助企业节省时间成本和费用开支。
 
 [![Travis](https://travis-ci.org/stbui/angular2-material2-bootstrap4-admin-app.svg?branch=master)](https://travis-ci.org/stbui/angular2-material2-bootstrap4-admin-app)
 [![Docker Build Statu](https://img.shields.io/docker/build/stbui/angular2-material2-admin-app.svg?style=flat-square)](https://hub.docker.com/r/stbui/angular2-material2-admin-app/)
@@ -45,16 +45,15 @@
 ### 使用入门
 
 ```
-npm i -g @angular/cli
-git clone https://github.com/stbui/angular2-material2-bootstrap4-admin-app.git
+git clone https://github.com/stbui/angular-material2-crm-app
 ```
-
 
 进入项目目录
 ```
 npm install
 npm run start
 ```
+
 打开你的浏览器，访问
 ```
 http://127.0.0.1:4200
@@ -69,7 +68,3 @@ ng build --prod --aot --env=prod --extract-css
 ### 关联项目
 
 [angular-material2-admin-app](https://github.com/stbui/angular2-material2-bootstrap4-admin-app)
-
-
-
-amap 接口地址依赖环境配置将移到组件内

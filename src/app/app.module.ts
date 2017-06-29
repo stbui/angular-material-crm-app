@@ -12,19 +12,18 @@ import { FooterComponent } from './footer/footer.component';
 import { CustomizerComponent } from './customizer/customizer.component';
 import { SidenavModule } from './sidenav/sidenav.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { RoutingModule } from './app.routing';
 import { ComponentModule } from './component/component.module';
-import { LeadsComponent } from './leads/leads.component';
-import { CustomersComponent } from './customers/customers.component';
+import { LeadsModule } from './leads/leads.module';
+import { CustomersModule } from './customers/customers.module';
+
+import { RoutingModule } from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     FooterComponent,
-    CustomizerComponent,
-    LeadsComponent,
-    CustomersComponent
+    CustomizerComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +33,11 @@ import { CustomersComponent } from './customers/customers.component';
     MaterialComponentsModule,
     HeaderModule,
     SidenavModule,
-    RoutingModule,
     ComponentModule,
-    DashboardModule
+    DashboardModule,
+    LeadsModule,
+    CustomersModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
