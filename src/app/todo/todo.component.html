@@ -1,0 +1,17 @@
+<stbui-layout>
+
+  <stbui-layout-header>
+    <stbui-search class="search" placeholder="搜索..."></stbui-search>
+  </stbui-layout-header>
+
+  <stbui-layout-sidenav>
+    <app-todo-sidenav></app-todo-sidenav>
+  </stbui-layout-sidenav>
+
+  <app-todo-toolbar></app-todo-toolbar>
+
+  <app-todo-list>
+    <app-todo-item *ngFor="let todo of todos" [todo]="todo"></app-todo-item>
+  </app-todo-list>
+
+</stbui-layout>

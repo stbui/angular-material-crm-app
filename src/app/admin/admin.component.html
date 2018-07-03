@@ -1,21 +1,22 @@
-<md-sidenav-container>
+<mat-sidenav-container [class.boxed]="layoutMode">
 
-  <md-sidenav class="customizer" align="end" mode="over" #customizer>
+  <mat-sidenav class="customizer" [position]="customizerSidenavAlign" mode="over" #customizer>
     <stbui-customizer></stbui-customizer>
-  </md-sidenav>
+  </mat-sidenav>
 
-  <md-sidenav class="sidenav" align="start" mode="side" opened="true" #sidenav>
-    <app-sidenav></app-sidenav>
-  </md-sidenav>
+  <mat-sidenav class="sidenav" [position]="sidenavAlign" [mode]="sidenavMode" [opened]="sidenavOpen" #sidenav>
+    <app-brand [ngClass]="settings.colorClasses.brand"></app-brand>
+    <stbui-navigation [ngClass]="settings.colorClasses.navigation"></stbui-navigation>
+  </mat-sidenav>
 
   <div class="sidenav-container" fxLayout="column">
-    <stbui-header [customizer]="customizer"></stbui-header>
+    <stbui-header [customizer]="customizer" [sidenav]="sidenav" [ngClass]="settings.colorClasses.header" *ngIf="settings.layout.header=='below'"></stbui-header>
 
     <div class="main-container" #scrollContainer>
       <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
-      <app-footer></app-footer>
     </div>
 
+    <stbui-footer *ngIf="settings.layout.footer=='below'"></stbui-footer>
   </div>
 
-</md-sidenav-container>
+</mat-sidenav-container>

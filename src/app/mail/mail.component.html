@@ -1,0 +1,69 @@
+<stbui-layout>
+
+  <stbui-layout-header>
+    <stbui-search class="search" placeholder="搜索..."></stbui-search>
+  </stbui-layout-header>
+
+  <stbui-layout-sidenav>
+    <div class="sidenav-content" [fxHide]="true" [fxHide.gt-md]="false">
+
+      <div class="title-container">
+        <mat-icon>mail</mat-icon>
+        <span class="title">Mail</span>
+      </div>
+
+      <div class="compose-container">
+        <button class="compose" mat-raised-button (click)="openComposeDialog()">
+          <mat-icon>mode_edit</mat-icon>
+          <span>写信</span>
+        </button>
+      </div>
+
+      <mat-nav-list>
+        <h3 mat-subheader>Inbox</h3>
+        <mat-list-item>
+          <mat-icon mat-list-icon>mail</mat-icon>
+          <h4 mat-line>收件箱</h4>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>group</mat-icon>
+          <h4 mat-line>联系人</h4>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>local_offer</mat-icon>
+          <h4 mat-line>标签</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <mat-icon mat-list-icon>star</mat-icon>
+          <h4 mat-line>星标邮件</h4>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>send</mat-icon>
+          <h4 mat-line>已发送</h4>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>drafts</mat-icon>
+          <h4 mat-line>草稿箱</h4>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>backspace</mat-icon>
+          <h4 mat-line>垃圾邮件</h4>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>delete</mat-icon>
+          <h4 mat-line>回收站</h4>
+        </mat-list-item>
+      </mat-nav-list>
+
+    </div>
+  </stbui-layout-sidenav>
+
+  <app-mail-toolbar [mail]="shownMailDetail" [itemCount]="shownMails.length" (onForward)="onForward($event)"></app-mail-toolbar>
+
+  <div class="mails">
+    <app-mail-list *ngIf="!shownMailDetail" [mails]="shownMails | async" (onOpenMailDetial)="openMailDetial($event)"></app-mail-list>
+    <app-mail-detail *ngIf="shownMailDetail" [mail]="shownMailDetail"></app-mail-detail>
+  </div>
+
+</stbui-layout>

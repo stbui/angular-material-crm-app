@@ -1,0 +1,43 @@
+$height__search__title: 56px;
+$margin-top__search__title: 42px;
+
+.search {
+  display: block;
+  margin-top: $margin-top__search__title;
+}
+
+.sidenav-content {
+  padding: $margin-top__search__title 24px 0;
+}
+
+.title-container {
+  min-height: $height__search__title;
+  max-height: $height__search__title;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  font-size: 28px;
+
+  mat-icon {
+    margin-right: 4px;
+    vertical-align: sub;
+  }
+
+  .title {
+    vertical-align: middle;
+  }
+}
+
+.compose-container {
+  margin: 52px 16px 0 12px;
+
+  .compose {
+    padding-left: 20px;
+    padding-right: 32px;
+    width: 100%;
+
+    mat-icon {
+      margin-right: 10px;
+    }
+  }
+}

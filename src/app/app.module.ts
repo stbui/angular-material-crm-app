@@ -1,46 +1,44 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { MaterialComponentsModule } from './material.module';
+import 'hammerjs';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+
+import { AppRoutingModule } from './app.routing';
+import { AdminModule } from './admin/admin.module';
 import { AppComponent } from './app.component';
-import { AdminComponent } from './admin/admin.component';
-import { HeaderModule } from './header/header.module';
-import { FooterComponent } from './footer/footer.component';
-import { CustomizerComponent } from './customizer/customizer.component';
-import { SidenavModule } from './sidenav/sidenav.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { ComponentModule } from './component/component.module';
-import { LeadsModule } from './leads/leads.module';
-import { CustomersModule } from './customers/customers.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { RoutingModule } from './app.routing';
+import { SignupComponent } from './pages/signup/signup.component';
+import { SigninComponent } from './pages/signin/signin.component';
+
+import { FireBaseComponentsModule } from './shared/firebase.module';
+
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent,
-    FooterComponent,
-    CustomizerComponent
+    DashboardComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
-    FormsModule,
-    MaterialComponentsModule,
-    HeaderModule,
-    SidenavModule,
-    ComponentModule,
-    DashboardModule,
-    LeadsModule,
-    CustomersModule,
-    RoutingModule
+    SharedModule,
+    CoreModule,
+    AdminModule,
+    AppRoutingModule,
+    FireBaseComponentsModule,
+    ReactiveFormsModule,
+    environment['ngsw'] ? ServiceWorkerModule.register('./ngsw-worker.js') : []
   ],
   providers: [],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
