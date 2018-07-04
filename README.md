@@ -1,5 +1,9 @@
 # CRM 系统快速开发框架
 
+<p align="center">
+  <a href="./" target="blank"><img src="src/assets/logo.png" alt="angular-material-crm-app" width="128" /></a>
+</p>
+
 基于最新`Angular 6`框架与`Material2`技术的企业级 CRM 系统快速开发框架，涵盖了大量的常用组件和基础功能，最大程度上帮助企业节省时间成本和费用开支。
 
 ### Plaform
@@ -22,6 +26,8 @@
 - 支持 electron 构建桌面应用
 - 接入 firebase， 构建应用提供良好的用户体验
 - 不定期更新，使用前端前沿技术开发新功能
+
+![crm-cover](src/assets/cover.png)
 
 ### 关联项目
 
