@@ -27,7 +27,7 @@
 - 接入 firebase， 构建应用提供良好的用户体验
 - 不定期更新，使用前端前沿技术开发新功能
 
-![crm-cover](src/assets/cover.png)
+![crm-cover](src/assets/crm-cover.png)
 
 ### 关联项目
 
