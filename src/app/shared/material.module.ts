@@ -26,6 +26,11 @@ import {
   MatInputModule,
   MatRippleModule,
   MatDividerModule,
+  MatExpansionModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatBadgeModule
 } from '@angular/material';
 
 @NgModule({
@@ -55,7 +60,12 @@ import {
     MatRadioModule,
     MatInputModule,
     MatRippleModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatBadgeModule
   ]
 })
-export class MaterialComponentsModule { }
+export class MaterialComponentsModule {}

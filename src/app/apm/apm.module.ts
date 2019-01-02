@@ -1,19 +1,32 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { SharedModule } from '../shared/shared.module';
 
 import { ApmRoutingModule } from './apm-routing.module';
-import { ErrorComponent } from './error/error.component';
-import { PerformanceComponent } from './performance/performance.component';
-import { SearchModule } from '../component/search';
-import { DetailComponent } from './error/detail/detail.component';
-import { ViewComponent } from './performance/view/view.component'
+import { ScriptModule } from './script/script.module';
+import { ManageModule } from './manage/manage.module';
+import { CollectionModule } from './collection/collection.module';
+import { PerformanceModule } from './performance/performance.module';
+
+import { LayoutComponent } from './layout/layout.component';
+import { BrandModule } from '../admin';
+import { NavigationModule } from '../component/navigation';
+import { NavigationService } from './layout/navigation.service';
 
 @NgModule({
   imports: [
+    CommonModule,
     SharedModule,
     ApmRoutingModule,
-    SearchModule
+    BrandModule,
+    NavigationModule,
+    ScriptModule,
+    ManageModule,
+    CollectionModule,
+    PerformanceModule
   ],
-  declarations: [ErrorComponent, PerformanceComponent, DetailComponent, ViewComponent]
+  declarations: [LayoutComponent],
+  providers: [NavigationService]
 })
-export class ApmModule { }
+export class ApmModule {}

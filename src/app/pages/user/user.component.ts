@@ -1,4 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-user',
@@ -6,40 +9,49 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  displayedColumns: string[] = [
+    'select',
+    'key',
+    'username',
+    'nickname',
+    'role',
+    'email',
+    'phone',
+    'createTime',
+    'status',
+    'star'
+  ];
 
-  users;
-  checked = false;
+  dataSource = new MatTableDataSource([]);
+  selection = new SelectionModel(true, []);
 
-  sideOpen: boolean = true;
-
-  constructor(@Inject('UserService') private _service) {
-  }
+  constructor(private service: UserService) {}
 
   ngOnInit() {
-    this.getUserList();
-  }
-
-  getUserList() {
-    this._service.getUserList();
-    this._service.userList$.subscribe(res => {
-      this.users = res;
+    this.service.getUserList().subscribe(res => {
+      this.dataSource = new MatTableDataSource(res);
     });
   }
 
-  onEditTriggered(user) {
-    console.log(user);
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
 
-  onDeleteTriggered(user) {
-    let i = this.users.indexOf(user);
-
-    this.users = [
-      ...this.users.slice(0, i),
-      ...this.users.slice(i + 1)
-    ];
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  onSideTriggered() {
-    this.sideOpen = false;
+  onAddTriggered() {}
+  onEditorTriggered(user) {
+    console.log(user)
+  }
+
+  onDeleteTriggered() {
+    console.log(this.selection.selected);
+    this.service.delete(this.selection.selected);
   }
 }

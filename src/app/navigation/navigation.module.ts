@@ -9,6 +9,8 @@ import { TagSelectModule } from '../component/tag-select';
 import { LoadingModule } from '../component/loading';
 import { GithubButtonModule } from '../component/github-button';
 import { PaginationModule } from '../component/pagination';
+import { SearchModule } from '../component/search';
+import { BrandModule } from '../admin';
 
 import { NavigationRoutingModule } from './navigation.routing';
 import { NavigationComponent } from './navigation.component';
@@ -20,13 +22,15 @@ import { ActionComponent } from './action/action.component';
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
-    NavigationRoutingModule,
-    PaginationModule,
+    MatButtonModule,
+    MatDialogModule,
     TagSelectModule,
+    PaginationModule,
     LoadingModule,
     GithubButtonModule,
-    MatDialogModule,
-    MatButtonModule
+    SearchModule,
+    BrandModule,
+    NavigationRoutingModule
   ],
   declarations: [NavigationComponent, ActionComponent],
   entryComponents: [ActionComponent],

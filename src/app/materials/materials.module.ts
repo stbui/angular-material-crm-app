@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CalendarModule } from 'angular-calendar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { SharedModule } from '../shared/shared.module';
 import {
@@ -12,7 +14,9 @@ import {
   PopoverModule,
   GithubButtonModule,
   SpeedDialModule,
-  ChatWidgetModule
+  ChatWidgetModule,
+  MessageModule,
+  DialogModule
 } from '../component';
 
 import { MaterialsRoutingModule } from './materials.routing';
@@ -35,12 +39,18 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { IconComponent } from './icon/icon.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ChatWidgetComponent } from './chat-widget/chat-widget.component';
+import { MessageComponent } from './message/message.component';
+import { DragDropComponent } from './drag-drop/drag-drop.component';
 
 @NgModule({
   imports: [
     SharedModule,
+    DragDropModule,
     MaterialsRoutingModule,
-    CalendarModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     NotificaitonModule,
     AmapModule.forRoot({ apiKey: '5ca4be36897408ccfacadf90df1c5f91' }),
     DatePickerModule,
@@ -50,7 +60,9 @@ import { ChatWidgetComponent } from './chat-widget/chat-widget.component';
     PopoverModule,
     GithubButtonModule,
     SpeedDialModule,
-    ChatWidgetModule
+    ChatWidgetModule,
+    MessageModule,
+    DialogModule
   ],
   declarations: [
     ToastComponent,
@@ -70,7 +82,9 @@ import { ChatWidgetComponent } from './chat-widget/chat-widget.component';
     CalendarComponent,
     IconComponent,
     NotificationComponent,
-    ChatWidgetComponent
+    ChatWidgetComponent,
+    MessageComponent,
+    DragDropComponent
   ]
 })
 export class MaterialsModule {}

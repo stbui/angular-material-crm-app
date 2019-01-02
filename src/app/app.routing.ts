@@ -1,25 +1,45 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from './core/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'crm', pathMatch: 'full' },
+  { path: '', redirectTo: '/pages/blog', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomeModule' },
   { path: 'sigin', component: SigninComponent },
   { path: 'sigup', component: SignupComponent },
   {
+    path: 'apps/navigation',
+    loadChildren: './navigation/navigation.module#NavigationModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'mail',
+    loadChildren: './mail/mail.module#MailModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'apps/chats',
+    loadChildren: './chats/chats.module#ChatsModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'crm',
+    loadChildren: './crm/crm.module#CrmModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'apm',
+    loadChildren: './apm/apm.module#ApmModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: '',
     component: AdminComponent,
     children: [
-      {
-        path: 'apps/navigation',
-        loadChildren: './navigation/navigation.module#NavigationModule'
-      },
-      { path: 'apps/chats', loadChildren: './chats/chats.module#ChatsModule' },
-      { path: 'apps/mail', loadChildren: './mail/mail.module#MailModule' },
       {
         path: 'apps/todo/:filter',
         loadChildren: './todo/todo.module#TodoModule'
@@ -32,15 +52,9 @@ const routes: Routes = [
       },
       { path: 'pages', loadChildren: './pages/pages.module#PagesModule' },
       {
-        path: 'components/chart',
-        loadChildren: './chart/chart.module#ChartModule'
-      },
-      {
         path: 'analysis',
         loadChildren: './analysis/analysis.module#AnalysisModule'
       },
-      { path: 'crm', loadChildren: './crm/crm.module#CrmModule' },
-      { path: 'apm', loadChildren: './apm/apm.module#ApmModule' },
       {
         path: 'page-layouts',
         loadChildren: './page-layouts/page-layouts.module#PageLayoutsModule'

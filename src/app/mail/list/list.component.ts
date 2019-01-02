@@ -1,4 +1,13 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { SelectionModel, DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-mail-list',
@@ -6,19 +15,36 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  displayedColumns: string[] = ['select', 'star', 'name', 'subject', 'when'];
+  dataSource: any = new MatTableDataSource([]);
+  selection = new SelectionModel(true, []);
 
-  @Input()  mails;
+  @Input()
+  set mails(val) {
+    this.dataSource = new MatTableDataSource(val);
+  }
   @Output() onOpenMailDetial = new EventEmitter();
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit() {}
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
 
-  ngOnInit() {
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  onOpenMailDetialTriggered(mail) {
-    this.onOpenMailDetial.emit(mail);
+  rowSelection(row) {
+    console.log(row);
+    this.onOpenMailDetial.emit(row);
   }
-
 }

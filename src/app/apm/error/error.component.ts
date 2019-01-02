@@ -1,4 +1,7 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material';
+import { ErrorService } from './error.service';
 
 @Component({
   selector: 'app-error',
@@ -6,96 +9,64 @@ import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
   styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent implements OnInit {
-
-  errors = [
-    {
-      "_id": "59b60467b071180fb66c6272",
-      "releaseStage": "production",
-      "firstSeen": "2017-09-11T03:35:03.155Z",
-      "status": "open",
-      "name": null,
-      "type": "resourceError",
-      "src": "https://stbui.com/img/wechat.JPG",
-      "statusCode": 0,
-      "statusText": null,
-      "httpMethod": null,
-      "httpUrl": null,
-      "message": null,
-      "url": "https://stbui.com/2016/07/10/mesos-marathon-platform/",
-      "severity": null,
-      "lastSeen": "2017-09-29T07:29:37.206Z",
-      "numberOfOccurence": 3,
-      "releaseStages": [
-        "production"
-      ],
-      "numberOfUser": 3,
-      "elapsedTime": "77391.385"
-    },
-    {
-      "_id": "59b60467b071180fb66c6272",
-      "releaseStage": "production",
-      "firstSeen": "2017-09-11T03:35:03.155Z",
-      "status": "open",
-      "name": null,
-      "type": "resourceError",
-      "src": "https://stbui.com/img/wechat.JPG",
-      "statusCode": 0,
-      "statusText": null,
-      "httpMethod": null,
-      "httpUrl": null,
-      "message": null,
-      "url": "https://stbui.com/2016/07/10/mesos-marathon-platform/",
-      "severity": null,
-      "lastSeen": "2017-09-29T07:29:37.206Z",
-      "numberOfOccurence": 3,
-      "releaseStages": [
-        "production"
-      ],
-      "numberOfUser": 3,
-      "elapsedTime": "77391.385"
-    }
+  displayedColumns: string[] = [
+    'select',
+    'firstSeen',
+    'src',
+    'type',
+    'releaseStages',
+    'star'
   ];
 
-  checkboxSelection = [];
-  checked: boolean = false;
-  openDetial: boolean = false;
-  // Exception
+  dataSource = new MatTableDataSource([]);
+  selection = new SelectionModel(true, []);
 
-  @HostListener('document:click', ['$event', '$event.target']) onClick(event: MouseEvent, targetElement: HTMLElement) {
+  openDetail: boolean = false;
+
+  @HostListener('document:click', ['$event', '$event.target'])
+  onClick(event: MouseEvent, targetElement: HTMLElement) {
     if (!targetElement) {
       return;
     }
 
-    const clickedInside = this._elementRef.nativeElement.contains(targetElement);
-    if (!clickedInside && this.openDetial === true) {
-      this.openDetial = false;
+    const clickedInside = this._elementRef.nativeElement.contains(
+      targetElement
+    );
+    if (!clickedInside && this.openDetail === true) {
+      this.openDetail = false;
     }
   }
 
-  constructor(private _elementRef: ElementRef) {
-  }
+  constructor(private _elementRef: ElementRef, private service: ErrorService) {}
 
   ngOnInit() {
+    this.service.getList().subscribe(res => {
+      this.dataSource = new MatTableDataSource(res);
+    });
   }
 
-  onCheckBoxAllTrigger($event) {
-    if ($event.checked) {
-      this.checkboxSelection = this.errors;
-    } else {
-      this.checkboxSelection = [];
-    }
-
-    // console.log(this.checkboxSelection);
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
 
-  onDetailTriggered(item) {
-    this.openDetial = true;
-    // console.log(item)
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  rowSelection(row, event) {
+    this.selection.toggle(row);
+    this.openDetail = true;
   }
 
   onOpenedTriggered(opened) {
-    console.log(opened);
-    this.openDetial = opened;
+    this.openDetail = opened;
   }
 
+  onSearchTriggered(value) {
+    console.log(value);
+  }
 }

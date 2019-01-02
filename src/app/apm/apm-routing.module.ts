@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ErrorComponent } from './error/error.component';
+import { LayoutComponent } from './layout/layout.component';
+import { ScriptComponent } from './script/script.component';
+import { ManageComponent } from './manage/manage.component';
+import { CollectionComponent } from './collection/collection.component';
 import { PerformanceComponent } from './performance/performance.component';
 
 const routes: Routes = [
-  {path: '', component: ErrorComponent},
-  {path: 'error', component: ErrorComponent},
-  {path: 'performance', component: PerformanceComponent}
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', component: ScriptComponent },
+      { path: 'script', component: ScriptComponent },
+      { path: 'manage', component: ManageComponent },
+      { path: 'collection', component: CollectionComponent },
+      { path: 'performance', component: PerformanceComponent }
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ApmRoutingModule { }
+export class ApmRoutingModule {}

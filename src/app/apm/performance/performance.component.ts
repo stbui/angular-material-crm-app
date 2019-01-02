@@ -1,97 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { PerformanceService } from './performance.service';
 
 @Component({
-  selector: 'app-performance',
+  selector: 'apm-performance',
   templateUrl: './performance.component.html',
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent implements OnInit {
+  displayedColumns: string[] = [
+    'id',
+    'releaseStage',
+    'connect',
+    'dns',
+    'black_waiting_time',
+    'total_time',
+    'url'
+  ];
+  dataSource: any = new MatTableDataSource([]);
 
-  data = {
-    columns: [
-      {
-        title: '资源地址'
-      },
-      {
-        title: '响应时间'
-      },
-      {
-        title: 'DNS时间'
-      },
-      {
-        title: '白屏时间'
-      },
-      {
-        title: '资源加载时间'
-      }
-    ],
-    datas: [
-      {
-        id: '1',
-        url: 'http://127.0.0.1:4200/stbui.bundle.css',
-        dns: '225',
-        response: '153',
-        load: '465',
-        black_waiting_time: '545'
-      },
-      {
-        id: '1',
-        url: 'http://127.0.0.1:4200/stbui.bundle.css',
-        dns: '225',
-        response: '153',
-        load: '465',
-        black_waiting_time: '545'
-      },
-      {
-        id: '1',
-        url: 'http://127.0.0.1:4200/stbui.bundle.css',
-        dns: '225',
-        response: '153',
-        load: '465',
-        black_waiting_time: '545'
-      },
-      {
-        id: '1',
-        url: 'http://127.0.0.1:4200/stbui.bundle.css',
-        dns: '225',
-        response: '153',
-        load: '465',
-        black_waiting_time: '545'
-      },
-      {
-        id: '1',
-        url: 'http://127.0.0.1:4200/stbui.bundle.css',
-        dns: '225',
-        response: '153',
-        load: '465',
-        black_waiting_time: '545'
-      },
-      {
-        id: '1',
-        url: 'http://127.0.0.1:4200/stbui.bundle.css',
-        dns: '225',
-        response: '153',
-        load: '465',
-        black_waiting_time: '545'
-      }, {
-        id: '1',
-        url: 'http://127.0.0.1:4200/stbui.bundle.css',
-        dns: '225',
-        response: '153',
-        load: '465',
-        black_waiting_time: '545'
-      }
-    ]
-  };
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() {
-  }
+  constructor(private service: PerformanceService) {}
 
   ngOnInit() {
+    this.service.getList().subscribe(res => {
+      this.dataSource = new MatTableDataSource(res.data);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
-  onDetailTriggered() {
-
+  rowSelection(row) {
+    console.log(row);
   }
-
 }
